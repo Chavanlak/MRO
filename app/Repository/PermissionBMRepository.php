@@ -8,10 +8,6 @@ class PermissionBMRepository{
    $branchid = PermissionBM::where('staffcode','=',$staffcode)->first()->branch;
    return $branchid;
    }
-   // public static function getBranchCode($id){
-   //    $branchid = PermissionBM::where('id','=',$id)->first()->branch;
-   //    return $branchid;
-   //    }
 }
 
 

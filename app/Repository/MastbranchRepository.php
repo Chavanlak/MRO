@@ -1,9 +1,10 @@
 <?php
 namespace App\Repository;
-
+use Illuminate\Support\Facades\Session;
 use App\Models\Mastbranchinfo;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Repository\PermissionBMRepository;
 class MastbranchRepository{
     public static function getallBranch(){
         return Mastbranchinfo::all();
@@ -62,27 +63,26 @@ class MastbranchRepository{
             ->value('email'); // ดึง email ของ branch
     }
 
-    //new
+    //old
     // public static function findEmailByname($branchname){
     //     return Mastbranchinfo::where('Location','=',$branchname)
     //     ->first()
     //     ->email; // ดึงอีเมลของสาขาจากชื่อสาขา
     // }
-    // public static function findEmailByname($branchname)
-    // {
-    //     return optional(
-    //         Mastbranchinfo::where('Location', $branchname)
-    //                       ->whereNotNull('email')   // บังคับให้ email ต้องไม่เป็น null
-    //                       ->first()
-    //     )->email;
-    // }
-      public static function findEmailByname($branchname){
-        return Mastbranchinfo::where('Location','=',$branchname)
-        ->whereNotNull('email') // ตรวจสอบว่า email ไม่เป็น null
-        ->first()
-        ->email; // ดึงอีเมลของสาขาจากชื่อสาขา
+    public static function findEmailByname($branchname){
+        // if(Session::get('permis_BM') == 'N' || Session::get('permis_BM') == 'n'){
+        //     return Mastbranchinfo::where('Location','=',$branchname)
+        //         ->first()
+        //         ->email; // ดึงอีเมลของสาขาจากชื่อสาขา
+        // }
+        // else{
+        //     $branchid = PermissionBMRepository::getBranchCode(Session::get('staffcode'));
+        //     return Mastbranchinfo::where('MBranchInfo_Code',branchid)->first()->email;
+        // }
+         return Mastbranchinfo::where('MBranchInfo_Code',$branchname)->first()->email;
+
     }
-    
+
     }
 
 ?>

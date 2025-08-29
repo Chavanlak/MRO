@@ -53,40 +53,40 @@ class EmailController extends Controller
         return "Email sent successfully!";
     }
 
-//     public static function saveNotiRepair(Request $req)
-//     {
-//     $noti = NotirepairRepository::saveNotiRepair($req->category, $req->detail,$req->zoneMail);
+    public static function saveNotiRepair(Request $req)
+    {
+    $noti = NotirepairRepository::saveNotiRepair($req->category, $req->detail,$req->zoneMail);
 
-//     $uploadedFiles = [];
+    $uploadedFiles = [];
 
-//     foreach($req->file('filepic') as $file){
-//         $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-//         $fileName = $filename."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
-//         $path = Storage::putFileAs('public/', $file, $fileName);
+    foreach($req->file('filepic') as $file){
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $fileName = $filename."_upload_".date("Y-m-d").".".$file->getClientOriginalExtension();
+        $path = Storage::putFileAs('public/', $file, $fileName);
 
-//         $fileup = new FileUpload();
-//         $fileup->filename = $fileName;
-//         $fileup->filepath = $path;
-//         $fileup->NotirepairId = $noti->NotirepairId;
-//         $fileup->save();
+        $fileup = new FileUpload();
+        $fileup->filename = $fileName;
+        $fileup->filepath = $path;
+        $fileup->NotirepairId = $noti->NotirepairId;
+        $fileup->save();
 
-//         // เก็บ path ไว้ใช้แนบในอีเมล
-//         $uploadedFiles[] = storage_path('app/'.$path);
-//     }
+        // เก็บ path ไว้ใช้แนบในอีเมล
+        $uploadedFiles[] = storage_path('app/'.$path);
+    }
 
-//     // ส่งอีเมลพร้อมแนบไฟล์
-//     Mail::raw("รายละเอียดการแจ้งซ่อม: ".$req->detail, function($message) use ($uploadedFiles) {
-//         $message->to('smartmeow11@gmail.com')
-//                 ->subject('แจ้งซ่อมใหม่เข้ามา');
+    // ส่งอีเมลพร้อมแนบไฟล์
+    Mail::raw("รายละเอียดการแจ้งซ่อม: ".$req->detail, function($message) use ($uploadedFiles) {
+        $message->to('smartmeow11@gmail.com')
+                ->subject('แจ้งซ่อมใหม่เข้ามา');
 
-//         foreach ($uploadedFiles as $filePath) {
-//             $message->attach($filePath);
-//         }
-//     });
+        foreach ($uploadedFiles as $filePath) {
+            $message->attach($filePath);
+        }
+    });
 
-//     // return redirect('/repair');
-//         return "Email sent successfully!";
-// }
+    // return redirect('/repair');
+        return "Email sent successfully!";
+}
 public function index()
     {
         $data = [

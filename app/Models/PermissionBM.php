@@ -9,7 +9,7 @@ class PermissionBM extends Model
 {
     protected $table = 'permission_bm';
     // protected $primaryKey = 'staffcode';
-    protected $primaryKey = 'id';
+       protected $primaryKey = 'id';
     public $timestamps = false;
     use HasFactory;
 }

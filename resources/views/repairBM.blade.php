@@ -44,10 +44,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="#">
-            {{-- <i class="mdi mdi-wrench-outline" style="color: #838382;"></i>
-            <span style="color: #838382;">MaintenanceRepairSystem</span> --}}
-            <img src="{{ asset('images/logomro.png') }}" alt="MRO Logo"
-            style="max-height: 50px; width: auto; margin-right: 8px;">
+            <i class="mdi mdi-wrench-outline" style="color: #838382;"></i>
+            <span style="color: #838382;">MaintenanceRepairSystem</span>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -56,21 +54,11 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
             <ul class="navbar-nav">
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link d-flex align-items-center text-danger" href="/logout" title="Logout">
                         <span class="mdi mdi-logout mdi-24px"></span>
                         <span class="ms-1 d-none d-lg-inline">Logout</span>
                     </a>
-                </li> --}}
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="nav-link d-flex align-items-center btn btn-link text-danger p-0">
-                            <span class="mdi mdi-logout mdi-24px"></span>
-                            <span class="ms-1">Logout</span>
-
-                        </button>
-                    </form>
                 </li>
             </ul>
         </div>
@@ -96,7 +84,8 @@
                             {{-- {{$branchid." ".$branchname}} --}}
                             </label>
                             {{-- ใช้ในการส่งข้อมูลเข้าsever --}}
-                            <input type="hidden" name="branch" value={{$branchname}}>
+                            {{-- <input type="hidden" name="branch" value="{{$branchname}}"> --}}
+                              <input type="hidden" name="branch" value="{{$branchid}}">
                               {{-- ใช้ในการเเสดงoutput --}}
                             <input type="text" class="form-control" value="{{$branchid." ".$branchname}}" disabled>
                         </div>
@@ -104,7 +93,7 @@
                         <!-- เลือก Zone -->
                         <div class="mb-3">
                             <label for="zone" class="form-label fw-bold">
-                                <i class="mdi mdi-map-marker-outline"></i> กรุณาเลือก Zone <span class="text-danger">*</span>
+                                <i class="mdi mdi-map-marker-outline"></i> กรุณาเลือก Zone
                             </label>
                             <select name="zone" id="zone" class="form-select" required>
                                 <option value="">-- เลือก Zone --</option>
@@ -117,7 +106,7 @@
                         <!-- เลือกหมวดหมู่ -->
                         <div class="mb-4">
                             <label for="category" class="form-label fw-bold">
-                                <i class="mdi mdi-tools"></i> เลือกหมวดหมู่แจ้งซ่อม <span class="text-danger">*</span>
+                                <i class="mdi mdi-tools"></i> เลือกหมวดหมู่แจ้งซ่อม
                             </label>
                             <select name="category" id="category" class="form-select" required>
                                 <option value="">-- เลือกหมวดหมู่ --</option>

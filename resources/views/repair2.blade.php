@@ -44,12 +44,9 @@
         {{-- <a class="navbar-brand text-primary fw-bold" href="#">
             <i class="mdi mdi-wrench-outline"></i> MaintenanceRepairSystem
         </a> --}}
-        
         <a class="navbar-brand fw-bold" href="#">
-            {{-- <i class="mdi mdi-wrench-outline" style="color: #838382;"></i>
-            <span style="color: #45484d;">MaintenanceRepairSystem</span> --}}
-            <img src="{{ asset('images/logomro.png') }}" alt="MRO Logo"
-            style="max-height: 50px; width: auto; margin-right: 8px;">
+            <i class="mdi mdi-wrench-outline" style="color: #838382;"></i>
+            <span style="color: #45484d;">MaintenanceRepairSystem</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,14 +56,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="nav-link d-flex align-items-center btn btn-link text-danger p-0">
-                            <span class="mdi mdi-logout mdi-24px"></span>
-                            <span class="ms-1">Logout</span>
-
-                        </button>
-                    </form>
+                    <a class="nav-link d-flex align-items-center text-danger" href="/logout" title="Logout">
+                        <span class="mdi mdi-logout mdi-24px"></span>
+                        <span class="ms-1 d-none d-lg-inline">Logout</span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -97,7 +90,7 @@
                         <!-- อุปกรณ์ -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">
-                                <i class="mdi mdi-tools"></i> เลือกอุปกรณ์ที่ต้องการแจ้งซ่อม <span class="text-danger">*</span>
+                                <i class="mdi mdi-tools"></i> เลือกอุปกรณ์ที่ต้องการแจ้งซ่อม
                             </label>
                             <select name="category" id="category" class="form-select" required>
                                 <option value="">-- เลือกอุปกรณ์ --</option>
@@ -110,7 +103,7 @@
                         <!-- รายละเอียด -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">
-                                <i class="mdi mdi-note-text-outline"></i> รายละเอียดแจ้งซ่อม <span class="text-danger">*</span>
+                                <i class="mdi mdi-note-text-outline"></i> รายละเอียดแจ้งซ่อม
                             </label>
                             <textarea name="detail" class="form-control" placeholder="ระบุรายละเอียด..." required></textarea>
                         </div>
@@ -133,9 +126,16 @@
                                 <i class="mdi mdi-email-outline"></i> อีเมลสาขา
                             </label>
                             <!-- แสดงอีเมลที่ส่งมาจาก Controller โดยอัตโนมัติ -->
-                            <p class="form-control-plaintext">{{ $branchEmail}}</p>
+
+                            @if ($branchEmail === null)
+                             <input type="hidden" name="email1" value="example@mail.com">
+                              <p class="form-control-plaintext">ไม่มีอีเมลสาขา</p>
+                            @else
+                                <input type="hidden" name="email1" value="{{ $branchEmail}}">
+                                 <p class="form-control-plaintext">{{ $branchEmail}}</p>
+                            @endif
                             <!-- ซ่อนค่าอีเมลไว้ใน hidden input เพื่อส่งข้อมูลไปกับฟอร์ม -->
-                            <input type="hidden" name="email1" value="{{ $branchEmail}}">
+                            {{-- <input type="hidden" name="email1" value="{{ $branchEmail}}"> --}}
                         </div>
 
                         <!-- อีเมลโซน -->
@@ -186,14 +186,9 @@
                         <!-- อัพโหลดไฟล์ -->
                         <div class="mb-4">
                             <label class="form-label fw-bold">
-                                <i class="mdi mdi-file-image"></i> แนบรูปภาพ / วิดิโอ (ถ้ามี) <span class="text-danger">ไม่เกิน 5 ไฟล์</span>
+                                <i class="mdi mdi-file-image"></i> แนบรูปภาพ / ไฟล์ (ถ้ามี)
                             </label>
                             <input type="file" name="filepic[]" class="form-control" multiple>
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
                         </div>
 
                         <!-- ปุ่ม -->

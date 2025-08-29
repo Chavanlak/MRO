@@ -51,13 +51,9 @@ class UserController extends Controller
     public function loginPost(Request $request)
     {
         // $staffname = $request->input('staffname');
-        //old
         $staffcode = $request->input('staffcode');
-        // $id = $request->input('id');
         $staffpassword = $request->input('staffpassword');
-        //old
         $user = DB::table('staff_rc')->where('staffcode', $staffcode)->first();
-        // $user = DB::table('staff_rc')->where('id', $id)->first();
         // $user = DB::table('staff_rc')->where('staffname', $staffname)->first();
         // $user = DB::table('user')
         //     ->where('staffname', $staffname)
@@ -74,16 +70,15 @@ class UserController extends Controller
         //     return redirect('/loginerror')->with('error', 'Login Failed');
         // }
         if(!$user){
-            return redirect('/')->with('error', 'ไม่พบชื่อผู้ใช้นี้');
+            return redirect('/login')->with('error', 'ไม่พบชื่อผู้ใช้นี้');
         }
         if($user->staffpassword !== $staffpassword){
-            return redirect('/')->with('error', 'รหัสผ่านไม่ถูกต้อง');
+            return redirect('/login')->with('error', 'รหัสผ่านไม่ถูกต้อง');
         }
 
         Session::put('logged_in', true);
         Session::put('staffname', $user->staffname);
-        // Session::put('staffcode', $user->staffcode);
-        Session::put('id', $user->staffcode);
+        Session::put('staffcode', $user->staffcode);
         Session::put('permis_BM',$user->permis_BM);
         // return view('/branch');
         // return redirect('/branch')->with('success', 'เข้าสู่ระบบสำเร็จ');
@@ -98,7 +93,7 @@ class UserController extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function showrepair()

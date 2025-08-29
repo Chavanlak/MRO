@@ -19,10 +19,6 @@
     <!-- Inter font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
-    
-    <!-- Tailwind CSS for modern styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <title>Login</title>
 
     <style>
@@ -65,21 +61,11 @@
 </head>
 
 <body>
-    {{-- <div class="flex justify-center items-center mt-8">
-        <img src="{{ asset('images/logomro.png') }}" alt="MRO Logo" class="w-48 h-auto">
-        <div class="ml-4">
-            <h1 class="text-3xl font-bold text-gray-800">MRO</h1>
-            <p class="text-sm text-gray-500">Maintenance & Repair Operations</p>
-        </div>
-    </div> --}}
-    <div class="flex justify-center mt-8">
-        {{-- <img src="{{ asset('images/logomro.png') }}" alt="MRO Logo" class="w-80 h-auto"> --}}
-        <img src="{{ asset('images/logomro.png') }}" alt="MRO Logo" class="w-48 h-auto md:w-64 lg:w-80">
-    </div>
+
     <div class="login-container">
         <span class="mdi mdi-account-box"></span>
-        <h2 class="text-center mb-4  text-xl">Login</h2>
-        {{-- <h2 class="text-3xl font-semibold text-gray-700">Login</h2> --}}
+        <h2 class="text-center mb-4">Login</h2>
+
         <form action="/loginpost" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
